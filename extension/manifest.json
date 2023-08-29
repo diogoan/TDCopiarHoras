@@ -1,0 +1,15 @@
+{
+    "name": "Time Doctor Copiar Horas",
+    "version": "1.0",
+    "description": "Código para copiar horas do site do Time Doctor.",
+    "manifest_version": 3,
+    "content_scripts": [
+      {
+        "matches": [
+            "https://m2ssoftware.timedoctor.com/*"
+        ],
+        "include_globs": ["*#/edit-time*"],
+        "js": ["jquery-3.6.4.min.js", "TimeDoctorCopiarHoras.js"]
+      }
+    ]
+}
