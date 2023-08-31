@@ -6,7 +6,7 @@
     "content_scripts": [
       {
         "matches": [
-            "https://m2ssoftware.timedoctor.com/*"
+            "https://*.timedoctor.com/*"
         ],
         "include_globs": ["*#/edit-time*"],
         "js": ["jquery-3.6.4.min.js", "TimeDoctorCopiarHoras.js"]
