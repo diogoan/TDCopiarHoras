@@ -21,47 +21,19 @@ function copiarTexto(textoParaCopiar){
 }
 
 function lerTabela() {
-    var entrada1 = "";
-    var saida1 = "";
-    var entrada2 = "";
-    var saida2 = "";
-    var entrada3 = "";
-    var saida3 = "";
-
-    var tabela = $(".td-table");
-    var linhas = tabela.find("tr");
-
-    linhas.each(function(index) {
-        var coluna5 = $(this).find("td:eq(4)").text();
-
-        if (coluna5 !== "-Not Working-" && coluna5 !== "") {
-            var start = $(this).find("td:eq(0)").text();
-            var end = $(this).find("td:eq(1)").text();
-
-            if (!entrada1) {
-                entrada1 = start;
-                saida1 = end;
-            } else if (saida1 == start) {
-                saida1 = end;
-            } else if (!entrada2) {
-                entrada2 = start;
-                saida2 = end;
-            } else if (saida2 == start) {
-                saida2 = end;
-            } else if (!entrada3) {
-                entrada3 = start;
-                saida3 = end;
-            } else if (saida3 == start) {
-                saida3 = end;
-            }
-        }
-    });
-
-    if (entrada3) {
-        return entrada1 + "	" + saida1 + "	" + entrada2 + "	" + saida2 + "	" + entrada3 + "	" + saida3 + "\n";
-    } else {
-        return entrada1 + "	" + saida1 + "	" + entrada2 + "	" + saida2 + "\n";
-    }
+    var s = '';
+	var isGrayed = true;
+	for (const e of document.querySelectorAll('.td-table tbody tr.ng-scope:not(.ng-hide)')) {
+		if (isGrayed && !e.classList.contains('td-row-grayed')) {
+			isGrayed = false;
+			s += e.firstElementChild.textContent + '\t';
+		} else if (!isGrayed && e.classList.contains('td-row-grayed')) {
+			isGrayed = true;
+			s += e.previousElementSibling.firstElementChild.nextElementSibling.textContent + '\t';
+		}
+	}
+	s = s.slice(0, s.length - 1);
+	return s;
 }
 
 function lerTotalHoras() {
