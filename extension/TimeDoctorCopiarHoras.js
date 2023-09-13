@@ -41,7 +41,7 @@ function lerTotalHoras() {
     return timeWorked + "\n";
 }
 
-function copiarHorasHoje() {
+function copiarHoras() {
     copiarTexto(lerTabela());
     alert("Horas copiadas para a Área de Transferência.");
 }
@@ -101,14 +101,14 @@ $("users-selection").remove();
 $(".td-timezone-btn-dashboard").remove();
 
 var upperMenu = $('.td-filters-right-side');
-upperMenu.append("<button class='td-button pull-right' id='copiarHorasHoje'>Copiar Horas Hoje</button>");
 upperMenu.append("<button class='td-button pull-right' id='iniciarArmazenamento'>Iniciar Armazenamento de Horas</button>");
-upperMenu.append("<button class='td-button pull-right' id='copiarHorasVariasDatas' style='display:none'>Copiar Horas Armazenadas</button>");
-upperMenu.append("<button class='td-button pull-right' id='copiarTotaisHoras' style='display:none'>Copiar Totais de Horas</button>");
 upperMenu.append("<button class='td-button pull-right' id='pararArmazenamento' style='display:none'>Parar Armazenamento</button>");
+upperMenu.append("<button class='td-button pull-right' id='copiarTotaisHoras' style='display:none'>Copiar Totais de Horas</button>");
+upperMenu.append("<button class='td-button pull-right' id='copiarHorasVariasDatas' style='display:none'>Copiar Horas Armazenadas</button>");
+upperMenu.append("<button class='td-button pull-right' id='copiarHoras'>Copiar Horas</button>");
 
-$("#copiarHorasHoje").click(copiarHorasHoje);
-$("#copiarHorasVariasDatas").click(copiarHorasVariasDatas);
-$("#copiarTotaisHoras").click(copiarTotaisHoras);
 $("#iniciarArmazenamento").click(iniciarArmazenamento);
 $("#pararArmazenamento").click(pararArmazenamento);
+$("#copiarTotaisHoras").click(copiarTotaisHoras);
+$("#copiarHorasVariasDatas").click(copiarHorasVariasDatas);
+$("#copiarHoras").click(copiarHoras);
