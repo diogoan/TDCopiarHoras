@@ -21,19 +21,22 @@ function copiarTexto(textoParaCopiar){
 }
 
 function lerTabela() {
-    var s = '';
-	var isGrayed = true;
+    var hours = '';
+	var isNotWorkingRow = true;
 	for (const e of document.querySelectorAll('.td-table tbody tr.ng-scope:not(.ng-hide)')) {
-		if (isGrayed && !e.classList.contains('td-row-grayed')) {
-			isGrayed = false;
-			s += e.firstElementChild.textContent + '\t';
-		} else if (!isGrayed && e.classList.contains('td-row-grayed')) {
-			isGrayed = true;
-			s += e.previousElementSibling.firstElementChild.nextElementSibling.textContent + '\t';
+		if (isNotWorkingRow && !e.classList.contains('td-row-grayed')) {
+            // Se não tiver a classe td-row-grayed, é linha de hora trabalhada, adicione a primeira hora da linha.
+			isNotWorkingRow = false;
+			hours += e.firstElementChild.textContent + '\t';
+		} else if (!isNotWorkingRow && e.classList.contains('td-row-grayed')) {
+            // Se tiver a classe td-row-grayed, é linha Not Working, pegue a segunda hora da linha anterior.
+			isNotWorkingRow = true;
+			hours += e.previousElementSibling.firstElementChild.nextElementSibling.textContent + '\t';
 		}
 	}
-	s = s.slice(0, s.length - 1);
-	return s;
+    // Remove tab final e insere new line.
+	hours = hours.slice(0, hours.length - 1) + '\n';
+	return hours;
 }
 
 function lerTotalHoras() {
@@ -94,7 +97,6 @@ function iniciarArmazenamento() {
     $("#iniciarArmazenamento").hide();
     $("#pararArmazenamento").show();
     alert("Armazenamento de horas iniciado. Mude a data para começar a armazenar na memória e depois copiar.");
-    debugger;
 }
 
 $("users-selection").remove();
