@@ -1,6 +1,6 @@
 var timesheet = "";
 var hoursWorkedPerDay = "";
-var lastReadDay = $(".dcal").find('.date-val').text();
+var lastReadDay = new Date($(".dcal").find('.date-val').text());
 var setIntervalId;
 
 function copiarTexto(textoParaCopiar){
@@ -50,13 +50,31 @@ function copiarHoras() {
 }
 
 function armazenarDatasHoje() {
-    var currentReadDay = $(".dcal").find('.date-val').text();
+    let currentReadDay = new Date($(".dcal").find('.date-val').text());
 
-    if (lastReadDay !== currentReadDay) {
+    let dateDiff = currentReadDay - lastReadDay;
+    let isNotSameDay = dateDiff !== 0;
+    let isFarDay = dateDiff > 86400000 || dateDiff < -86400000;
+    let isFuture = dateDiff > 0;
+    let isPast = dateDiff < 0;
+
+    if (isNotSameDay) {
+        if (isFarDay) {
+            alert("Você mudou para uma data fora da sequência em relação ao dia atual. Isso fará com que as horas armazenadas na próxima linha não sejam as do dia seguinte, e nem as horas armazenadas na linha anterior sejam do dia anterior.");
+        }
+
+        if (isFuture) {
+            timesheet = timesheet + lerTabela();
+            hoursWorkedPerDay = hoursWorkedPerDay + lerTotalHoras();
+        }
+
+        if (isPast) {
+            timesheet = lerTabela() + timesheet;
+            hoursWorkedPerDay = lerTotalHoras() + hoursWorkedPerDay;
+        }
+
         lastReadDay = currentReadDay;
-        timesheet = timesheet + lerTabela();
-        hoursWorkedPerDay = hoursWorkedPerDay + lerTotalHoras();
-        console.log(timesheet);
+        //console.log(timesheet);
     }
 }
 
