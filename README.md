@@ -2,22 +2,15 @@
 Extensão do Google Chrome para copiar horas do Time Doctor.
 
 ## Como Funciona
-Essa extensão do Google Chrome cria alguns botões no site do Time Doctor, mais especificamente na página Edit Time, para copiar as horas de entrada e saída da data atual e de múltiplas datas para preencher a planilha de horas (timesheet).
+Essa extensão do Google Chrome adiciona alguns botões na página Edit Time no site do Time Doctor, possibilitando copiar as horas de entrada e saída da data atual e de múltiplas datas para preencher a planilha de horas (timesheet).
 
-![image](https://github.com/diogoan/TDCopiarHoras/assets/3026040/0f0e0dee-b5d3-4332-90c8-1c05db369532)
+![chrome_fWmdbAFYEq](https://github.com/diogoan/TDCopiarHoras/assets/3026040/6215d4ef-2f98-4a2a-aa91-edf7008215da)
 
-O código é capaz de identificar e ignorar tarefas diferentes em um mesmo dia, desde que elas sejam sequencias e não haja nenhum intervalo entre elas.
+O código é capaz de identificar diferentes tarefas sequenciais no mesmo dia (desde que não haja nenhum intervalo entre elas) para copiar apenas a primeira e a última hora de uma sequência de tarefas.
 
-As horas já são copiadas no formato compatível com Excel/Google Docs. Isso significa que cada hora vai ocupar uma célula.
+As horas já são copiadas no formato compatível com Excel/Google Docs. Isso significa que cada hora vai preencher uma célula.
 
-As seguintes horas são copiadas para a área de transferência:
-
-* Hora de entrada (início do trabalho)
-* Hora de saída (saída para o almoço/intervalo)
-* Hora de entrada (volta do almoço/intervalo)
-* Hora de saída (fim do trabalho ou segundo intervalo)
-* Hora de entrada (volta do segundo intervalo, se houver)
-* Hora de saída (fim do trabalho)
+O script pode copiar todos os intervalos de horas que estiverem no mesmo dia.
 
 Por exemplo, se sua planilha de horas estiver assim no Time Doctor:
 
@@ -34,14 +27,14 @@ As únicas horas que serão copiadas estarão nesse formato:
 | 9:00 AM | 12:30 PM | 1:30 PM | 6:00 PM |
 | - | - | - | - |
 
-Observação: para desocupar espaço para os botões novos, alguns elementos pouco ou nunca usados são removidos da página (ver imagem abaixo).
+Observação: para desocupar espaço para os botões novos, os seguintes elementos (que são pouco ou nunca usados) tiveram que ser removidos da página (ver imagem abaixo).
 
 * Time Zone (fuso horário)
 * User (usuário atual)
 
 Caso haja necessidade de usá-los, basta desabilitar a extensão no Google Chrome (ou usar a opção This can read and change site data > When you click the extension).
 
-![image](https://github.com/diogoan/TDCopiarHoras/assets/3026040/54790ce5-4cf2-4c95-a9ab-1bd357e995fa)
+![chrome_1eaAhQMPQu](https://github.com/diogoan/TDCopiarHoras/assets/3026040/91f9caca-7c6d-4da5-b243-80aab2e6a164)
 
 ## Como Instalar
 
@@ -54,7 +47,7 @@ Para mais informações, veja esse link: https://canaltech.com.br/navegadores/co
 
 ## Funções
 
-### Copiar Horas Hoje
+### Copiar Horas
 
 Copia apenas as horas correspondentes ao dia selecionado na tela atual, no formato explicado acima.
 
@@ -64,7 +57,9 @@ Inicia o modo Armazenamento de Horas, que permite armazenar e copiar as horas de
 
 Dias sem nenhuma hora trabalhada irão aparecer como uma linha vazia.
 
-É recomendável ir para o primeiro dia (a data mais antiga) antes de habilitar esse modo, e só depois ir passando os dias para copiar na sequência correta (da data mais antiga para a mais recente).
+Caso o dia passado for o próximo dia em relação à data atual, as horas serão adicionadas à linha seguinte. Se for o dia anterior, as horas serão adicionados ao dia anterior.
+
+Se um dia distante for selecionado no seletor de data, uma mensagem será mostrada avisando que horas de dias não sequenciais serão armazenados, mas não corresponderão nem ao dia anterior, nem ao dia seguinte.
 
 ### Copiar Horas Armazenadas
 
@@ -76,4 +71,4 @@ Copia os totais de horas trabalhadas de todas as datas armazenadas para a Área 
 
 ### Parar Armazenamento
 
-Termina o modo Armazenamento de Horas e limpa as horas armazenadas.
+Termina o modo Armazenamento de Horas e limpa todas as horas armazenadas na memória.
